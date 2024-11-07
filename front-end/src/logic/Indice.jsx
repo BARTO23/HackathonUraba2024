@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Facturas from "../components/Facturas";
 import { Pqr } from "../components/Pqr";
 
-export const index = () => {
+export const Indice = () => {
   return (
     <BrowserRouter>
       <Routes>
