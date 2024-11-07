@@ -1,14 +1,12 @@
 
 import './App.css'
-import {DashBoard} from './components/DashBoard'
-import {SideBar} from './components/SideBar'
+import DashBoardMain from './views/DashBoardMain'  
 
 function App() {
 
   return (
     <>
-      <DashBoard/>
-      <SideBar/>
+      <DashBoardMain/>
     </>
   )
 }
