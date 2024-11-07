@@ -1,14 +1,13 @@
-import {DashBoard} from '../components/DashBoard'
-import {SideBar} from '../components/SideBar'
+import { DashBoard } from "../components/DashBoard";
+import { SideBar } from "../components/SideBar";
 
 function DashBoardMain() {
-
   return (
-    <>
-      <DashBoard/>
-      <SideBar/>
-    </>
-  )
+    <div className="flex">
+      <SideBar />
+      <DashBoard />
+    </div>
+  );
 }
 
-export default DashBoardMain
+export default DashBoardMain;
