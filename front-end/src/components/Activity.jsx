@@ -1,16 +1,12 @@
-import React from 'react'
-
 export const Activity = () => {
   return (
-    <div className="mt-6">
-              <div>
-                <h3>Resumen de Actividad</h3>
-              </div>
-              <div>
-                <div className="h-[200px] flex items-center justify-center text-muted-foreground">
-                  <h2 className="h-16 w-16" />
-                  <span className="ml-4">Gráfico de actividad (simulado)</span>
-                </div>
-    </div>
-  )
-}
+    <section className="mt-6">
+      <header>
+        <h3 className="text-xl font-semibold">Resumen de Actividad</h3>
+      </header>
+      <div className="flex items-center justify-center h-[200px] text-muted-foreground w-full">
+        <span className="ml-4">Gráfico de actividad (simulado)</span>
+      </div>
+    </section>
+  );
+};

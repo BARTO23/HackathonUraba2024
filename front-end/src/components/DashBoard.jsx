@@ -1,4 +1,5 @@
 import Card from "./Card";
+import { Activity } from "./Activity";
 export const DashBoard = () => {
   return (
     <main className="flex-1 overflow-y-auto p-4">
@@ -34,6 +35,7 @@ export const DashBoard = () => {
           percentageChange="+3% desde el mes pasado"
         />
       </div>
+      <Activity />
     </main>
   );
 };
