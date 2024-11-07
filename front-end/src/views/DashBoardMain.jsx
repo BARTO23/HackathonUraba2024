@@ -1,4 +1,6 @@
-import { DashBoard } from "../components/DashBoard";
+
+// import { DashBoard } from "../components/DashBoard";
+import Clientes from "../components/Clientes";
 import { SideBar } from "../components/SideBar";
 import { Title } from "../components/Title";
 
@@ -8,7 +10,9 @@ function DashBoardMain() {
       <Title />
       <div className="flex flex-1">
         <SideBar />
-        <DashBoard />
+        {/* <DashBoard /> */}
+        <Clientes />
+
       </div>
     </div>
   );
