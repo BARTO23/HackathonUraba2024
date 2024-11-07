@@ -1,12 +1,12 @@
 
 import './App.css'
-import DashBoardMain from './views/DashBoardMain'  
+import PruebaPython from './components/PruebaPython'  
 
 function App() {
 
   return (
     <>
-      <DashBoardMain/>
+      <PruebaPython/>
     </>
   )
 }
