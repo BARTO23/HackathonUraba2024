@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import DashBoardMain from "../views/DashBoardMain";
-import ClientesDashBoardMain  from "../views/ClientesDashBoardMain";
-import FacturasDashBoardMain  from "../views/FacturasDashBoardMain";
 import { Pqr } from "../components/Pqr";
 import Login from "../views/Login";
 import {LandingPage} from '../views/LandingPage'
 import Installations from "../components/Installations";
 import { Register } from "../views/Register";
-// import Facturas from "../components/Facturas";
-// import IndexClient from "../views/viewsClient/IndexClient";
+import TicketDashboard from "../views/TicketDashboard";
+import ClientesDashBoardMain  from "../views/ClientesDashBoardMain";
+import FacturasDashBoardMain  from "../views/FacturasDashBoardMain";
+
 
 
 export const Indice = () => {
@@ -26,6 +26,7 @@ export const Indice = () => {
         <Route path="/admin" element={<DashBoardMain />} />
         <Route path="/facturas" element={<FacturasDashBoardMain />} />
         <Route path="/clientes" element={<ClientesDashBoardMain />} />
+        <Route path="/ticket" element={<TicketDashboard />} />
         <Route path="/pqr" element={<Pqr />} />
         <Route path="/installations" element={<Installations />} />
 
