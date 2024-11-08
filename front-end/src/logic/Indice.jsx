@@ -12,7 +12,7 @@ import ClientSidebar from "../components/ClientSideBar";
 import ClientInfo from "../components/ClientComponents/ClientInfo";
 import { ClientMain } from "../views/viewsClient/ClientMain";
 import { Services } from "../views/viewsClient/Services";
-import {ClientTickets} from "../components/ClientComponents/TicketsClient";
+import { ClientTickets } from "../components/ClientComponents/TicketsClient";
 import { ClientPeticiones } from "../views/viewsClient/ClientPeticiones";
 
 export const Indice = () => {

@@ -1,6 +1,6 @@
-import React from 'react'
-import ClientSidebar from '../../components/ClientSideBar'
+
 import {TicketsClient} from '../../components/ClientComponents/TicketsClient'
+import ClientSidebar from '../../components/ClientSideBar'
 
 export const ClientTickets = () => {
   return (
