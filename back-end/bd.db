@@ -1,3 +1,4 @@
+
 create schema dbs_hackathon;
 use dbs_hackathon;
 
@@ -67,9 +68,11 @@ create table tbl_servicios(
 create table tbl_factura(
 	id_factura int unsigned auto_increment,
 	fecha_factura timestamp default current_timestamp(),
-	fk_id_tbl_det_factura int not null,
+	fk_id_tbl_cliente int not null, 
+    fk_id_tbl_usuario int not null,
 	total decimal(10,2) not null,
     primary key(id_factura),
+    foreign key(fk_id_tbl_cliente) references tbl_clientes(id_cliente),
     foreign key(fk_id_tbl_usuario) references tbl_usuarios(id_usuario)
 );
 
@@ -87,24 +90,25 @@ create table tbl_det_factura(
     foreign key(fk_id_tbl_servicio) references tbl_servicios(id_servicio)
 );
 
+create table tbl_area(
+	id_area tinyint unsigned auto_increment,
+    descripcion varchar(255) not null,
+    fk_id_tbl_servicio tinyint unsigned not null,
+    primary key(id_area),
+    foreign key(fk_id_tbl_servicio) references tbl_servicios(id_servicio)
+);
+
 create table tbl_tickets(
 	id_ticket int auto_increment,
 	fk_id_tbl_cliente int not null,
 	fk_id_tbl_area tinyint unsigned not null,
 	detalles text,
 	fecha timestamp default current_timestamp(),
-	primary key(id_detalle),
+	primary key(id_ticket),
     foreign key(fk_id_tbl_cliente) references tbl_clientes(id_cliente),
     foreign key(fk_id_tbl_area) references tbl_area(id_area)
 );
 
-create table tbl_area(
-	id_area tinyint unsigned auto_increment,
-    descripcion varchar(255) not null,
-    fk_id_tbl_servicio tinyint unsigned not null,
-    primary key(id_area),
-    foreign key(fk_id_tbl_servicio) references tbl_servicios(id_servicios)
-);
 
 create table tbl_tecnicos(
 	id_tecnico int auto_increment,
@@ -118,7 +122,8 @@ create table tbl_tecnicos(
     fk_id_tbl_rol tinyint unsigned not null,
     fk_id_tbl_area tinyint unsigned not null,
 	detalle_cuenta TEXT,
-    primary key(id_cliente),
+    primary key(id_tecnico),
 	foreign key (fk_id_tbl_rol) references tbl_rol(id_rol),
     foreign key (fk_id_tbl_area) references tbl_area(id_area)
 );
+

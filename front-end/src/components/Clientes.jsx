@@ -1,4 +1,3 @@
-import React from 'react'
 
 function Clientes() {
 
@@ -61,59 +60,45 @@ function Clientes() {
         <div>
             <div className="container mx-auto p-4">
                 <h1 className="text-2xl font-bold mb-4">Panel de Gestión de Usuarios</h1>
-                <form className="mb-8 p-4 bg-gray-100 rounded-lg">
+                <form className="mb-2 p-6 bg-gray-100 rounded-lg">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <input
                             name="primerNombre"
                             placeholder="Primer Nombre *"
-                            value=""
-                            onChange=""
                             className="w-full p-2 rounded"
                             required    
                         />
                         <input
                             name="segundoNombre"
                             placeholder="Segundo Nombre"
-                            value=""
-                            onChange=""
                             className="w-full p-2 rounded"
                         />
                         <input
                             name="primerApellido"
                             placeholder="Primer Apellido *"
-                            value=""
-                            onChange=""
                             className="w-full p-2 rounded"
                             required
                         />
                         <input
                             name="segundoApellido"
                             placeholder="Segundo Apellido"
-                            value=""
-                            onChange=""
                             className="w-full p-2 rounded"
                         />
                         <input
                             name="direccion"
                             placeholder="Dirección *"
-                            value=""
-                            onChange=""
                             className="w-full p-2 rounded"
                             required
                         />
                         <input
                             name="contacto"
                             placeholder="Contacto *"
-                            value=""
-                            onChange=""
                             className="w-full p-2 rounded"
                             required
                         />
                         <textarea
                             name="detalle"
                             placeholder="Detalle"
-                            value=""
-                            onChange=""
                             className="w-full col-span-2 rounded p-2"
                         />
                     </div>
@@ -122,37 +107,36 @@ function Clientes() {
                     </button>
                 </form>
                 <div className="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-200">
-                        <thead class="bg-gray-50">
+                    <table className="min-w-full divide-y divide-gray-200">
+                        <thead className="bg-gray-50">
                             <tr>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Primer Nombre</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Segundo Nombre</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Primer Apellido</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Segundo Apellido</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dirección</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detalle</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Primer Nombre</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Segundo Nombre</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Primer Apellido</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Segundo Apellido</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dirección</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detalle</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody className="bg-white divide-y divide-gray-200">
                             {users.map((user) => (
                                 <tr key={user.id}>
-                                    <td class="px-6 py-4 whitespace-nowrap">{user.primerNombre}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{user.segundoNombre}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{user.primerApellido}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{user.segundoApellido}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{user.direccion}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{user.contacto}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{user.detalle}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
+                                    <td className="px-6 py-4 whitespace-nowrap">{user.primerNombre}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{user.segundoNombre}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{user.primerApellido}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{user.segundoApellido}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{user.direccion}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{user.contacto}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{user.detalle}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
                                         <button
-                                            class="text-blue-600 hover:text-blue-900"
-                                            onClick="">
+                                            className="text-blue-600 hover:text-blue-900">
                                                 mandar
                                         </button>
                                         <button
-                                            class="text-red-600 hover:text-red-900 ml-2"
+                                            className="text-red-600 hover:text-red-900 ml-2"
                                             onClick={() => console.log("boton")}>
                                                  Eliminar
      
