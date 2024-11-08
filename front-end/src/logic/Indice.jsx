@@ -38,8 +38,6 @@ export const Indice = () => {
 
         {/* Ruta de cliente */}  
         
-
-        
       </Routes>
     </BrowserRouter>
   );

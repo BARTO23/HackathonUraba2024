@@ -4,7 +4,7 @@ import axios from 'axios';
 function Clientes() {
 
     const [users, setUsers] = useState([]);
-    const [newItem, setNewItem] = useState('');
+    // const [newItem, setNewItem] = useState('');
 
     const fetchData = () => {
         axios.get('http://localhost:5000/get_users')
@@ -87,6 +87,7 @@ function Clientes() {
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">DNI</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Apellido</th>
+                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Correo</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dirección</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contacto</th>
                                 <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Detalle</th>
@@ -94,11 +95,12 @@ function Clientes() {
                             </tr>
                         </thead>
                         <tbody className="bg-white divide-y divide-gray-200">
-                            {users.map((user) => (
-                                <tr key={user.id}>
+                            {users.map((user, index) => (
+                                <tr key={index}>
                                     <td className="px-6 py-4 whitespace-nowrap">{user.documento}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{user.primer_nombre} {user.segundo_nombre}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{user.primer_apellido} {user.segundo_apellido}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap">{user.correo}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{user.direccion}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{user.contacto}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">{user.detalle_cuenta}</td>
