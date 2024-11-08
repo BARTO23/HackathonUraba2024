@@ -1,12 +1,12 @@
 import React from "react";
 import ClientSidebar from "../../components/ClientSideBar";
-import ClientInfo from "../../components/ClientComponents/ClientInfo";
+import ClientServices from "../../components/ClientComponents/ClientServices";
 
-export const ClientMain = () => {
+export const Services = () => {
   return (
     <div className='flex flex-1'>
       <ClientSidebar />
-      <ClientInfo />
+      <ClientServices />
     </div>
   );
 };

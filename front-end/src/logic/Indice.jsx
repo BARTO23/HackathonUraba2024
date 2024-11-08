@@ -11,6 +11,9 @@ import FacturasDashBoardMain from "../views/FacturasDashBoardMain";
 import ClientSidebar from "../components/ClientSideBar";
 import ClientInfo from "../components/ClientComponents/ClientInfo";
 import { ClientMain } from "../views/viewsClient/ClientMain";
+import { Services } from "../views/viewsClient/Services";
+import {ClientTickets} from "../components/ClientComponents/TicketsClient";
+import { ClientPeticiones } from "../views/viewsClient/ClientPeticiones";
 
 export const Indice = () => {
   return (
@@ -37,9 +40,12 @@ export const Indice = () => {
         <Route path="/home" element={<LandingPage />} />
 
         {/* Ruta de cliente */}
-        <Route path="/client" element={<ClientSidebar />} />
+        <Route path="/client" element={<ClientInfo />} />
         <Route path="/client-info" element={<ClientInfo />} />
         <Route path="/client-main" element={<ClientMain />} />
+        <Route path="/client-services" element={<Services />} />
+        <Route path="/client-tickets" element={<ClientTickets />} />
+        <Route path="/client-request" element={<ClientPeticiones />} />
       </Routes>
     </BrowserRouter>
   );
