@@ -6,15 +6,23 @@ import { Pqr } from "../components/Pqr";
 //import Login from "../views/Login";
 import {LandingPage} from '../views/LandingPage'
 import Installations from "../components/Installations";
+import { Register } from "../views/Register";
 
 
 export const Indice = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<DashBoardMain />} />
-        <Route path="/clientes" element={<ClientesDashBoardMain />} />
-        <Route path="/facturas" element={<FacturasDashBoardMain />} />
+
+        <Route path="/" element={<Navigate to="/home" replace />} />
+
+        {/* Ruta de LOGIN Y REGISTER */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        {/* Rutas de ADMIN */}
+        <Route path="/dashboard" element={<DashBoardMain />} />
+        <Route path="/facturas" element={<Facturas />} />
         <Route path="/pqr" element={<Pqr />} />
         <Route path="/installations" element={<Installations />} />
 
