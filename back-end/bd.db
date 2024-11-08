@@ -11,6 +11,7 @@ CREATE TABLE tbl_clientes (
     segundo_apellido varchar(50),
     direccion varchar(255) not null,
     contacto varchar(10) not null,
+	correo varchar(255) not null,
     detalle_cuenta TEXT,
     primary key(id_cliente)
 );
