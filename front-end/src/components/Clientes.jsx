@@ -96,6 +96,13 @@ function Clientes() {
                             className="w-full p-2 rounded"
                             required
                         />
+                        <input
+                            name="contacto"
+                            placeholder="Correo *"
+                            type="mail"
+                            className="w-full p-2 rounded"
+                            required
+                        />
                         <textarea
                             name="detalle"
                             placeholder="Detalle"

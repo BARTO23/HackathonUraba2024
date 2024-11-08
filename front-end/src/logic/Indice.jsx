@@ -1,5 +1,7 @@
 import React from "react";
 import DashBoardMain from "../views/DashBoardMain";
+import ClientesDashBoardMain  from "../views/ClientesDashBoardMain";
+import FacturasDashBoardMain  from "../views/FacturasDashBoardMain";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Pqr } from "../components/Pqr";
 import Login from "../views/Login";
