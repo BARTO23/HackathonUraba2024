@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const NavBar = () => {
+export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -66,3 +66,4 @@ export const NavBar = () => {
     </nav>
   );
 }
+
