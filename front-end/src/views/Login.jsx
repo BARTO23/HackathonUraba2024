@@ -160,8 +160,6 @@ export default function Login() {
             </div>
           </form>
 
-          
-
           <div className="mt-6">
             <p className="text-center text-sm text-gray-600">
               ¿No tiene una cuenta?{" "}
