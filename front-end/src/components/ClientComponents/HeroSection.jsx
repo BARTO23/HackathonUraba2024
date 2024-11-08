@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function FAQHeroSection() {
+export function HeroSection() {
   const faqs = [
     {
       question: "¿Cómo puedo crear una nueva cuenta?",
