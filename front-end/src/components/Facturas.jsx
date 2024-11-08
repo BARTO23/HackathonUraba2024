@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { CiSquarePlus } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const Facturas = () => {
-  // Datos de facturas de ejemplo
   const [filteredFacturas, setFilteredFacturas] = useState([
     {
       id: 1,
@@ -23,22 +24,120 @@ const Facturas = () => {
       monto: 500,
       estado: "Pendiente",
     },
-    // Más facturas aquí...
   ]);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [newFactura, setNewFactura] = useState({
+    numero: "",
+    cliente: "",
+    fecha: "",
+    monto: "",
+    estado: "Pendiente",
+  });
+
+  const handleAddFactura = () => {
+    const newFacturaData = {
+      ...newFactura,
+      id: filteredFacturas.length + 1,
+    };
+    setFilteredFacturas([...filteredFacturas, newFacturaData]);
+    setNewFactura({ numero: "", cliente: "", fecha: "", monto: "", estado: "Pendiente" });
+    setIsFormOpen(false);
+  };
+
+  const descargarPDF = () => {
+    const doc = new jsPDF();
+    const currentDate = new Date().toISOString().split("T")[0];
+    doc.text("Facturas", 20, 10);
+    doc.text(`Fecha: ${currentDate}`, 20, 20);
+
+    autoTable(doc, {
+      startY: 30,
+      head: [["Número", "Cliente", "Fecha", "Monto", "Estado"]],
+      body: filteredFacturas.map((factura) => [
+        factura.numero,
+        factura.cliente,
+        factura.fecha,
+        `$${factura.monto.toFixed(2)}`,
+        factura.estado,
+      ]),
+    });
+
+    doc.save(`Facturas_${currentDate}.pdf`);
+  };
 
   return (
     <main className="flex-1 overflow-y-auto p-4">
-      {/* Título y botón */}
+      {/* Título y botones */}
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-semibold text-gray-800 dark:text-white">
           Facturas
         </h2>
-        <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-          <CiSquarePlus className="mr-2 h-4 w-4" /> Nueva Factura
-        </button>
+        <div className="flex space-x-2">
+          <button
+            onClick={descargarPDF}
+            className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700"
+          >
+            Descargar Facturas
+          </button>
+          <button
+            onClick={() => setIsFormOpen(true)}
+            className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          >
+            <CiSquarePlus className="mr-2 h-4 w-4" /> Nueva Factura
+          </button>
+        </div>
       </div>
 
-      {/* Tabla */}
+      {/* Formulario para agregar nueva factura */}
+      {isFormOpen && (
+        <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+          <input
+            type="text"
+            placeholder="Número de Factura"
+            className="block w-full p-2 mb-2 border rounded"
+            value={newFactura.numero}
+            onChange={(e) => setNewFactura({ ...newFactura, numero: e.target.value })}
+          />
+          <input
+            type="text"
+            placeholder="Cliente"
+            className="block w-full p-2 mb-2 border rounded"
+            value={newFactura.cliente}
+            onChange={(e) => setNewFactura({ ...newFactura, cliente: e.target.value })}
+          />
+          <input
+            type="date"
+            placeholder="Fecha"
+            className="block w-full p-2 mb-2 border rounded"
+            value={newFactura.fecha}
+            onChange={(e) => setNewFactura({ ...newFactura, fecha: e.target.value })}
+          />
+          <input
+            type="number"
+            placeholder="Monto"
+            className="block w-full p-2 mb-2 border rounded"
+            value={newFactura.monto}
+            onChange={(e) => setNewFactura({ ...newFactura, monto: parseFloat(e.target.value) })}
+          />
+          <select
+            className="block w-full p-2 mb-2 border rounded"
+            value={newFactura.estado}
+            onChange={(e) => setNewFactura({ ...newFactura, estado: e.target.value })}
+          >
+            <option value="Pendiente">Pendiente</option>
+            <option value="Pagada">Pagada</option>
+            <option value="Vencida">Vencida</option>
+          </select>
+          <button
+            onClick={handleAddFactura}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+          >
+            Agregar Factura
+          </button>
+        </div>
+      )}
+
+      {/* Tabla de facturas */}
       <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
         <table className="min-w-full table-auto">
           <thead>
