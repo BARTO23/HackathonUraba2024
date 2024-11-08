@@ -12,7 +12,7 @@ export const SideBar = () => {
   
   return (
     <nav className="mt-4">
-      <Link to="/"className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 bg-gray-200 dark:bg-gray-700">
+      <Link to="/admin"className="flex items-center px-4 py-2 text-gray-700 dark:text-gray-200 bg-gray-200 dark:bg-gray-700">
         <h3 className="mr-3 h-5 w-5" />
         Inicio
       </Link>

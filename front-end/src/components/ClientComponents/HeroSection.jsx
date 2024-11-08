@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Solicitudes } from "./Solicitudes";
 
 export function HeroSection() {
   const faqs = [
@@ -43,36 +44,41 @@ export function HeroSection() {
           Encuentre respuestas rápidas a las preguntas más comunes sobre
           nuestros servicios y cómo podemos ayudarle.
         </p>
-        <div className="max-w-3xl mx-auto">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="mb-4 bg-white bg-opacity-10 rounded-lg overflow-hidden"
-            >
-              <button
-                className="w-full p-4 text-left flex justify-between items-center focus:outline-none"
-                onClick={() => toggleFAQ(index)}
+        <div className="flex max-w-5xl mx-auto">
+          <div className="w-2/6 pr-4">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="mb-4 bg-white bg-opacity-10 rounded-lg overflow-hidden"
               >
-                <span className="font-medium text-lg">{faq.question}</span>
-                {openIndex === index ? (
-                  <span className="h-5 w-5">▲</span> // Icono para FAQ abierto
-                ) : (
-                  <span className="h-5 w-5">▼</span> // Icono para FAQ cerrado
+                <button
+                  className="w-full p-4 text-left flex justify-between items-center focus:outline-none"
+                  onClick={() => toggleFAQ(index)}
+                >
+                  <span className="font-medium text-lg">{faq.question}</span>
+                  {openIndex === index ? (
+                    <span className="h-5 w-5">▲</span> // Icono para FAQ abierto
+                  ) : (
+                    <span className="h-5 w-5">▼</span> // Icono para FAQ cerrado
+                  )}
+                </button>
+                {openIndex === index && (
+                  <div className="p-4 bg-white bg-opacity-5">
+                    <p className="text-sm md:text-base">{faq.answer}</p>
+                  </div>
                 )}
-              </button>
-              {openIndex === index && (
-                <div className="p-4 bg-white bg-opacity-5">
-                  <p className="text-sm md:text-base">{faq.answer}</p>
-                </div>
-              )}
-            </div>
-          ))}
+              </div>
+            ))}
+          </div>
+          <div className="w-4/6">
+            <Solicitudes />
+          </div>
         </div>
-        <div className="text-center mt-12">
+        {/* <div className="text-center mt-12">
           <button className="bg-white text-purple-700 hover:bg-purple-100 py-2 px-4 rounded">
             Ver todas las preguntas
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );

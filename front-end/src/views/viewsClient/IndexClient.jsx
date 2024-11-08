@@ -5,6 +5,7 @@ function IndexClient() {
   return (
     <div>
         <Navbar/>
+        <h1>pepe</h1>
     </div>
   )
 }

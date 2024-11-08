@@ -3,10 +3,12 @@ import DashBoardMain from "../views/DashBoardMain";
 import ClientesDashBoardMain  from "../views/ClientesDashBoardMain";
 import FacturasDashBoardMain  from "../views/FacturasDashBoardMain";
 import { Pqr } from "../components/Pqr";
-//import Login from "../views/Login";
+import Login from "../views/Login";
 import {LandingPage} from '../views/LandingPage'
 import Installations from "../components/Installations";
 import { Register } from "../views/Register";
+// import Facturas from "../components/Facturas";
+// import IndexClient from "../views/viewsClient/IndexClient";
 
 
 export const Indice = () => {
@@ -21,8 +23,9 @@ export const Indice = () => {
         <Route path="/register" element={<Register />} />
 
         {/* Rutas de ADMIN */}
-        <Route path="/dashboard" element={<DashBoardMain />} />
-        <Route path="/facturas" element={<Facturas />} />
+        <Route path="/admin" element={<DashBoardMain />} />
+        <Route path="/facturas" element={<FacturasDashBoardMain />} />
+        <Route path="/clientes" element={<ClientesDashBoardMain />} />
         <Route path="/pqr" element={<Pqr />} />
         <Route path="/installations" element={<Installations />} />
 
@@ -31,6 +34,11 @@ export const Indice = () => {
 
         {/* Ruta de inicio */}  
         <Route path="/home" element={<LandingPage />} />
+
+        {/* Ruta de cliente */}  
+        
+
+        
       </Routes>
     </BrowserRouter>
   );
