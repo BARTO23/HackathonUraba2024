@@ -56,7 +56,31 @@ def add_user():
     conn.close()
     return jsonify({'message': 'Item added successfully'}), 201
 
+@app.route('/verify_user', methods=['POST'])
+def verify_user():
+    data = request.get_json()
+    username = data.get('username')
+    password = data.get('password')
 
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    # Verificar si el usuario y la contraseña coinciden
+    cursor.execute("SELECT * FROM tbl_usuarios WHERE username = %s AND password = %s", (username, password))
+    user = cursor.fetchone()
+    
+    conn.close()
+
+    if user:
+        # Si el usuario y la contraseña coinciden, devolver los datos del usuario
+        column_names = [column[0] for column in cursor.description]
+        user_data = dict(zip(column_names, user))
+        return jsonify(user_data), 200
+    else:
+        # Si no coinciden, devolver un mensaje de error
+        return jsonify({'message': 'Invalid username or password'}), 401
+    
+    
 @app.route('/delete_user/<int:documento>', methods=['DELETE'])
 def delete_user(documento):
     conn = get_db_connection()

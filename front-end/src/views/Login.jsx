@@ -1,8 +1,6 @@
 import { useState } from "react";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
@@ -33,6 +31,27 @@ export default function Login() {
       setIsLoading(false);
     }
   };
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // Crear un objeto con los datos del usuario
+  const userData = {
+    email: email,
+    password: password
+  };
+
+  const verifyUser = (data) => {
+    // e.preventDefault(); // Prevent default form submission
+    console.log(data);
+
+    axios.post('http://localhost:5000/add_user', { item: userData })
+      .then(response => {
+        console.log('Data posted:', response.data);
+        fetchData(); // Fetch updated data after posting
+      })
+      .catch(error => {
+        console.error('Error posting data:', error);
+      });
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -44,7 +63,7 @@ export default function Login() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6" onSubmit={verifyUser}>
             <div>
               <label
                 htmlFor="email"
