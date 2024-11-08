@@ -5,6 +5,7 @@ import { Pqr } from "../components/Pqr";
 import Login from "../views/Login";
 import {LandingPage} from '../views/LandingPage'
 import Installations from "../components/Installations";
+import { Register } from "../views/Register";
 
 export const Indice = () => {
   return (
@@ -13,8 +14,9 @@ export const Indice = () => {
 
         <Route path="/" element={<Navigate to="/home" replace />} />
 
-        {/* Ruta de LOGIN */}
+        {/* Ruta de LOGIN Y REGISTER */}
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
         {/* Rutas de ADMIN */}
         <Route path="/dashboard" element={<DashBoardMain />} />

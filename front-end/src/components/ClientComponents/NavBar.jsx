@@ -48,7 +48,7 @@ export const NavBar = () => {
         {/* Login and Sign In */}
         <div className="flex flex-col items-end">
           <a href="/login" className="text-white text-lg font-thin mb-1">Login</a>
-          <a href="/signin" className="text-white text-sm">Sign in</a>
+          <a href="/register" className="text-white text-sm">Sign Up</a>
         </div>
       </div>
 
@@ -61,7 +61,7 @@ export const NavBar = () => {
         <a href="/pqrs" className="block text-white py-2">PQRs</a>
         <a href="/menu" className="block text-white py-2">Menú</a>
         <a href="/login" className="block text-white py-2 mt-2">Login</a>
-        <a href="/signin" className="block text-white py-2">Sign in</a>
+        <a href="/register" className="block text-white py-2">Sign in</a>
       </div>
     </nav>
   );
