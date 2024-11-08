@@ -33,6 +33,8 @@ const Facturas = () => {
     monto: "",
     estado: "Pendiente",
   });
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingFactura, setEditingFactura] = useState(null);
 
   const handleAddFactura = () => {
     const newFacturaData = {
@@ -42,6 +44,28 @@ const Facturas = () => {
     setFilteredFacturas([...filteredFacturas, newFacturaData]);
     setNewFactura({ numero: "", cliente: "", fecha: "", monto: "", estado: "Pendiente" });
     setIsFormOpen(false);
+  };
+
+  const handleEditFactura = (factura) => {
+    setEditingFactura(factura);
+    setNewFactura(factura); // Populate form with current factura data
+    setIsFormOpen(true);
+    setIsEditing(true);
+  };
+
+  const handleUpdateFactura = () => {
+    setFilteredFacturas(
+      filteredFacturas.map((factura) =>
+        factura.id === editingFactura.id ? newFactura : factura
+      )
+    );
+    setNewFactura({ numero: "", cliente: "", fecha: "", monto: "", estado: "Pendiente" });
+    setIsFormOpen(false);
+    setIsEditing(false);
+  };
+
+  const handleDeleteFactura = (id) => {
+    setFilteredFacturas(filteredFacturas.filter((factura) => factura.id !== id));
   };
 
   const descargarPDF = () => {
@@ -88,7 +112,7 @@ const Facturas = () => {
         </div>
       </div>
 
-      {/* Formulario para agregar nueva factura */}
+      {/* Formulario para agregar o editar factura */}
       {isFormOpen && (
         <div className="mb-4 p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
           <input
@@ -129,10 +153,10 @@ const Facturas = () => {
             <option value="Vencida">Vencida</option>
           </select>
           <button
-            onClick={handleAddFactura}
+            onClick={isEditing ? handleUpdateFactura : handleAddFactura}
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
           >
-            Agregar Factura
+            {isEditing ? "Actualizar Factura" : "Agregar Factura"}
           </button>
         </div>
       )}
@@ -198,10 +222,16 @@ const Facturas = () => {
                     <button className="text-gray-600 hover:text-gray-900">
                       <FaEye className="h-4 w-4" />
                     </button>
-                    <button className="text-gray-600 hover:text-gray-900">
+                    <button
+                      onClick={() => handleEditFactura(factura)}
+                      className="text-blue-600 hover:text-blue-900"
+                    >
                       <FaPencilAlt className="h-4 w-4" />
                     </button>
-                    <button className="text-gray-600 hover:text-gray-900">
+                    <button
+                      onClick={() => handleDeleteFactura(factura.id)}
+                      className="text-red-600 hover:text-red-900"
+                    >
                       <FaRegTrashAlt className="h-4 w-4" />
                     </button>
                   </div>
