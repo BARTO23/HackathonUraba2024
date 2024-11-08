@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CiSquarePlus } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import axios from 'axios';
+
 
 const Facturas = () => {
+
   const [filteredFacturas, setFilteredFacturas] = useState([
     {
       id: 1,
@@ -64,6 +67,24 @@ const Facturas = () => {
     setIsEditing(false);
   };
 
+  const [fact, setFact] = useState([])
+
+  const fetchData = () => {
+    axios.get('http://localhost:5000/get_facturas')
+      .then(response => {
+        setFact(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  };
+
+  console.log(fact);
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+
   const handleDeleteFactura = (id) => {
     setFilteredFacturas(filteredFacturas.filter((factura) => factura.id !== id));
   };
@@ -77,12 +98,13 @@ const Facturas = () => {
     autoTable(doc, {
       startY: 30,
       head: [["Número", "Cliente", "Fecha", "Monto", "Estado"]],
-      body: filteredFacturas.map((factura) => [
-        factura.numero,
-        factura.cliente,
-        factura.fecha,
-        `$${factura.monto.toFixed(2)}`,
+      body: fact.map((factura) => [
+        factura.id_factura,
+        factura.fk_id_tbl_cliente,
+        factura.fecha_factura,
+        factura.total,
         factura.estado,
+
       ]),
     });
 
@@ -166,55 +188,29 @@ const Facturas = () => {
         <table className="min-w-full table-auto">
           <thead>
             <tr className="bg-gray-100 dark:bg-gray-700">
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">
-                Número
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">
-                Cliente
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">
-                Fecha
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">
-                Monto
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">
-                Estado
-              </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">
-                Acciones
-              </th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">Número</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">Cliente</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">Fecha</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">Monto</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">Estado</th>
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 dark:text-white">Acciones</th>
             </tr>
           </thead>
           <tbody>
-            {filteredFacturas.map((factura) => (
-              <tr
-                key={factura.id}
-                className="border-t border-gray-200 dark:border-gray-700"
-              >
-                <td className="px-6 py-3 text-sm text-gray-800 dark:text-white">
-                  {factura.numero}
-                </td>
-                <td className="px-6 py-3 text-sm text-gray-800 dark:text-white">
-                  {factura.cliente}
-                </td>
-                <td className="px-6 py-3 text-sm text-gray-800 dark:text-white">
-                  {factura.fecha}
-                </td>
-                <td className="px-6 py-3 text-sm text-gray-800 dark:text-white">
-                  ${factura.monto.toFixed(2)}
-                </td>
+            {fact.map((factura, index) => (
+              <tr key={index} className="border-t border-gray-200 dark:border-gray-700">
+                <td className="px-6 py-3 text-sm text-gray-800 dark:text-white">{factura.fecha_factura}</td>
+                <td className="px-6 py-3 text-sm text-gray-800 dark:text-white">{factura.fecha_factura}</td>
+                <td className="px-6 py-3 text-sm text-gray-800 dark:text-white">{factura.fecha_factura}</td>
+                <td className="px-6 py-3 text-sm text-gray-800 dark:text-white">${factura.total}</td>
                 <td>
-                  <span
-                    className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                      factura.estado === "Pagada"
-                        ? "bg-green-200 text-green-800"
-                        : factura.estado === "Pendiente"
-                        ? "bg-yellow-200 text-yellow-800"
-                        : "bg-red-200 text-red-800"
-                    }`}
-                  >
-                    {factura.estado}
+                  <span className={`px-2 py-1 text-xs font-semibold rounded-full ${factura.fk_id_tbl_estado === 1 ? "bg-green-200 text-green-800" :
+                      factura.fk_id_tbl_estado === 2 ? "bg-yellow-200 text-yellow-800" :
+                        "bg-red-200 text-red-800"
+                    }`}>
+                    {factura.fk_id_tbl_estado === 1 ? "Abierto" :
+                      factura.fk_id_tbl_estado === 2 ? "En Proceso" :
+                        "Cerrado"}
                   </span>
                 </td>
                 <td>
@@ -222,16 +218,10 @@ const Facturas = () => {
                     <button className="text-gray-600 hover:text-gray-900">
                       <FaEye className="h-4 w-4" />
                     </button>
-                    <button
-                      onClick={() => handleEditFactura(factura)}
-                      className="text-blue-600 hover:text-blue-900"
-                    >
+                    <button onClick={() => handleEditFactura(factura)} className="text-blue-600 hover:text-blue-900">
                       <FaPencilAlt className="h-4 w-4" />
                     </button>
-                    <button
-                      onClick={() => handleDeleteFactura(factura.id)}
-                      className="text-red-600 hover:text-red-900"
-                    >
+                    <button onClick={() => handleDeleteFactura(factura.id)} className="text-red-600 hover:text-red-900">
                       <FaRegTrashAlt className="h-4 w-4" />
                     </button>
                   </div>
@@ -241,6 +231,7 @@ const Facturas = () => {
           </tbody>
         </table>
       </div>
+
     </main>
   );
 };

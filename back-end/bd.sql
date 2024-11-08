@@ -37,6 +37,27 @@ create table tbl_usuario_cliente(
     foreign key (fk_id_tbl_rol) references tbl_rol(id_rol),
     foreign key (fk_id_tbl_usuario) references tbl_usuarios(id_usuario)
 );
+DELIMITER //
+CREATE TRIGGER cliente_usuario_delete 
+BEFORE DELETE ON tbl_clientes
+FOR EACH ROW
+BEGIN
+    DECLARE id_usuario_old INT;
+
+    SELECT fk_id_tbl_usuario 
+    INTO id_usuario_old 
+    FROM tbl_usuario_cliente 
+    WHERE fk_id_tbl_cliente = OLD.id_cliente
+    LIMIT 1;  
+
+    DELETE FROM tbl_usuario_cliente   
+    WHERE fk_id_tbl_cliente = OLD.id_cliente;
+
+    DELETE FROM tbl_usuarios   
+    WHERE id_usuario = id_usuario_old;
+    
+END //
+DELIMITER ;
 
 delimiter //
 create trigger cliente_usuario after insert on tbl_clientes
