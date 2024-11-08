@@ -10,26 +10,33 @@ def get_db_connection():
         host="localhost",
         user="root",
         password="",
-        database="prueba_triggers",
+        database="dbs_hackathon",
         port="3306"
     )
     return conn
 
-@app.route('/prueba', methods=['GET', 'POST'])
-def prueba():
+@app.route('/get_users', methods=['GET', 'POST'])
+def get_users():
     conn = get_db_connection()
     cursor = conn.cursor()
 
     if request.method == 'POST':
         new_item = request.json['item']
-        cursor.execute("INSERT INTO tbl_rol (descripcion) VALUES (%s)", (new_item,))
+        cursor.execute("INSERT INTO tbl_clientes (documento) VALUES (%s)", (new_item,))
         conn.commit()
         return jsonify({'message': 'Item added successfully'}), 201
 
-    cursor.execute("SELECT * FROM tbl_rol")
+    cursor.execute("SELECT * FROM tbl_clientes")
     data = cursor.fetchall()
+    
+    # Specify column names based on your table structure
+    column_names = [column[0] for column in cursor.description]
+
+    # Convert to list of dictionaries
+    results = [dict(zip(column_names, row)) for row in data]
+
     conn.close()
-    return jsonify(data)
+    return jsonify(results)
 
 if __name__ == '__main__':
     app.run(debug=True)
