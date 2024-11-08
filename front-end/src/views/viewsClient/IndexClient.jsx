@@ -1,11 +1,12 @@
 import React from 'react'
-import Navbar from '../../components/ClientComponents/NavBar'
+import ClientSidebar from '../../components/ClientComponents/ClientSidebar'
+import ClientInfo from '../../components/ClientComponents/ClientInfo'
 
 function IndexClient() {
   return (
-    <div>
-        <Navbar/>
-        <h1>pepe</h1>
+    <div className='flex flex-1'>
+        <ClientSidebar/>
+        <ClientInfo/>
     </div>
   )
 }
