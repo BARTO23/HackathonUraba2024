@@ -1,0 +1,4 @@
+Flask
+Flask-Mail
+mysql-connector-python
+python-dotenv

@@ -67,10 +67,12 @@ create table tbl_servicios(
 create table tbl_factura(
 	id_factura int unsigned auto_increment,
 	fecha_factura timestamp default current_timestamp(),
-	fk_id_tbl_det_factura int not null,
+	fk_id_tbl_cliente int not null, 
+    fk_id_tbl_usuario int not null,
 	total decimal(10,2) not null,
     primary key(id_factura),
-    foreign key(fk_id_tbl_usuario) references tbl_usuarios(id_usuario)
+    foreign key(fk_id_tbl_cliente) references tbl_clientes(id_cliente),
+    foreign key(fk_id_tbl_usuario) references tbl_usuarios(id_usuario),
 );
 
 create table tbl_det_factura(
